@@ -4,10 +4,14 @@
     ViewBag.Title = "Index";
 }
 
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 <h2>Index</h2>
 
-<div class="row">
-    <div class="col-md-6">
+<div class="row mb-4">
+    <div class="col-md-8 ">
         <table class="table">
             <tr>
                 <th>
@@ -16,9 +20,17 @@
                 <th>
                     @Html.DisplayNameFor(model => model.NumberOfCreditBook)
                 </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.FIO)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubjectName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.count)
+                </th>
+
                 <th>
 
                 </th>
@@ -26,31 +38,46 @@
 
             @foreach (var item in Model)
             {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Group_2_GroupNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfCreditBook)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FIO)
-            </td>
-            <td>
-
-            </td>
-        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Group_2_GroupNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfCreditBook)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FIO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubjectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.count)
+                    </td>
+                </tr>
             }
 
         </table>
-        <form action="http://localhost:53013/Task1/TestMethod">
-            <input name="searchString">
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            @using (Html.BeginForm("Index", "Task1", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td><p>Группа</p></td>
+                        <td><input type="text" name="groupNum" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Найти" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+            </div>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
     </div>
 
 
-    <div class="col-md-6">
+    <div class="col-md-8">
         <table class="table">
             <tr>
                 <th>
@@ -85,12 +112,23 @@
             }
 
         </table>
-        <form action="http://localhost:53013/Task1/TestMethod">
-            <input name="searchString">
-            <button type="submit">Submit</button>
-        </form>
+        <div>
+            @using (Html.BeginForm("Index2", "Task1", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td><p>Группа</p></td>
+                        <td><input type="text" name="groupNum2" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Найти" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+        </div>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index2", new { page }))
+
     </div>
-
-
 </div>
 

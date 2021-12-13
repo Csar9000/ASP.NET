@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Duble2.Models;
+using PagedList;
 
 namespace Duble2.Controllers
 {
@@ -15,13 +16,16 @@ namespace Duble2.Controllers
         private Entities1 db = new Entities1();
 
         // GET: Task1
-        public ActionResult Index(string groupNum)
+        public ActionResult Index(string groupNum,string groupNum2, int? page)
         {
-            groupNum = "asu-22-102";
             if (groupNum != "")
             {
-                var g = db.TaskOneProc(groupNum);
-                return View(g.ToList());
+                var g = db.TaskOneProc(groupNum).OrderBy(x=>x.SubjectName).ToList();
+
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                return View(g.ToPagedList(pageNumber, pageSize));
+
             }
             else
             {
@@ -29,6 +33,25 @@ namespace Duble2.Controllers
                 return View(rgroup.ToList());
                 //group = db.Group_2.Include(s => s.Student).Take(10);
             }    
+        }
+        // GET: Task1
+        public ActionResult Index2(string groupNum2, int? page)
+        {
+            if (groupNum2 != "")
+            {
+                var g = db.TaskOneProc(groupNum2).OrderBy(x => x.SubjectName).ToList();
+
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                return View(g.ToPagedList(pageNumber, pageSize));
+
+            }
+            else
+            {
+                var rgroup = db.TaskOneProc(groupNum2);
+                return View(rgroup.ToList());
+                //group = db.Group_2.Include(s => s.Student).Take(10);
+            }
         }
 
         // GET: Task1/Details/5

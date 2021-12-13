@@ -334,15 +334,6 @@ namespace Duble2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubjectUpdateProc", subjectNameParameter, teachersFIOParameter, departmentParameter);
         }
     
-        public virtual ObjectResult<TaskOneProc_Result> TaskOneProc(string groupNum)
-        {
-            var groupNumParameter = groupNum != null ?
-                new ObjectParameter("GroupNum", groupNum) :
-                new ObjectParameter("GroupNum", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskOneProc_Result>("TaskOneProc", groupNumParameter);
-        }
-    
         public virtual int TaskOneProcFindNumber(Nullable<int> numberOfCreditBook, string subject, Nullable<System.DateTime> dateNow)
         {
             var numberOfCreditBookParameter = numberOfCreditBook.HasValue ?
@@ -435,6 +426,15 @@ namespace Duble2.Models
                 new ObjectParameter("Subject", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskTwoProc1_Result>("TaskTwoProc1", subjectParameter);
+        }
+    
+        public virtual ObjectResult<TaskOneProc_Result> TaskOneProc(string groupNum)
+        {
+            var groupNumParameter = groupNum != null ?
+                new ObjectParameter("GroupNum", groupNum) :
+                new ObjectParameter("GroupNum", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskOneProc_Result>("TaskOneProc", groupNumParameter);
         }
     }
 }

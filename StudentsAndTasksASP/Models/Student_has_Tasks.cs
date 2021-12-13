@@ -11,20 +11,12 @@ namespace Duble2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Student_has_Tasks
     {
         public int Student_NumberOfCreditBook { get; set; }
         public int Tasks_idTaskNumber { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> TaskPassDate { get; set; }
-
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> TaskGetDate { get; set; }
     
         public virtual Student Student { get; set; }

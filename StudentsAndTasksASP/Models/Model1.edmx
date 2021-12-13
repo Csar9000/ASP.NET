@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Curriculum">
           <Key>
             <PropertyRef Name="Group_2_GroupNum" />
@@ -47,12 +47,6 @@
           <Property Name="TeachersFIO" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Department" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6013: Первичный ключ в таблице или представлении "Students & Tasks.dbo.TaskOne" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
-        <EntityType Name="TaskOne">
-          <Property Name="GroupNum" Type="nchar" MaxLength="10" />
-          <Property Name="IdTasks" Type="int" />
-        </EntityType>-->
         <EntityType Name="Tasks">
           <Key>
             <PropertyRef Name="idTaskNumber" />
@@ -407,8 +401,7 @@
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -745,7 +738,7 @@
           <FunctionImport Name="FillSubject" ReturnType="Collection(String)" />
           <FunctionImport Name="FillTasks" />
           <FunctionImport Name="Group_2DeleteProc">
-            <Parameter Name="GroupNum" Mode="In" Type="String" />
+          <Parameter Name="GroupNum" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Group_2InsertProc">
             <Parameter Name="GroupNum" Mode="In" Type="String" />
@@ -776,7 +769,7 @@
             <Parameter Name="TaskGetDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="StudentDeleteProc">
-            <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
+          <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="StudentInsertProc">
             <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
@@ -805,9 +798,6 @@
             <Parameter Name="TeachersFIO" Mode="In" Type="String" />
             <Parameter Name="Department" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="TaskOneProc" ReturnType="Collection(DBModel.TaskOneProc_Result)">
-            <Parameter Name="GroupNum" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="TaskOneProcFindNumber">
             <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
             <Parameter Name="Subject" Mode="In" Type="String" />
@@ -833,7 +823,10 @@
             <Parameter Name="Summary" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="TaskTwoProc1" ReturnType="Collection(DBModel.TaskTwoProc1_Result)">
-            <Parameter Name="Subject" Mode="In" Type="String" />
+          <Parameter Name="Subject" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaskOneProc" ReturnType="Collection(DBModel.TaskOneProc_Result)">
+            <Parameter Name="GroupNum" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ComplexTableGroupSelectProc_Result">
@@ -881,12 +874,6 @@
           <Property Type="String" Name="TeachersFIO" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Department" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="TaskOneProc_Result">
-          <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
-          <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
-        </ComplexType>
         <ComplexType Name="TasksSelectProc_Result">
           <Property Type="Int32" Name="idTaskNumber" Nullable="false" />
           <Property Type="Int16" Name="TaskNumber" Nullable="false" />
@@ -898,6 +885,14 @@
           <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
           <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="TaskOneProc_Result">
+          <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="NumberOfCreditBook" Nullable="true" />
+          <Property Type="String" Name="FIO" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="count" Nullable="false" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="Name3" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1057,16 +1052,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SubjectUpdateProc" FunctionName="Хранилище DBModel.SubjectUpdateProc" />
-          <FunctionImportMapping FunctionImportName="TaskOneProc" FunctionName="Хранилище DBModel.TaskOneProc">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DBModel.TaskOneProc_Result">
-                <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
-                <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
-                <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TaskOneProcFindNumber" FunctionName="Хранилище DBModel.TaskOneProcFindNumber" />
           <FunctionImportMapping FunctionImportName="TasksDELETEProc" FunctionName="Хранилище DBModel.TasksDELETEProc" />
           <FunctionImportMapping FunctionImportName="TasksInsertProc" FunctionName="Хранилище DBModel.TasksInsertProc" />
@@ -1088,6 +1073,18 @@
                 <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
                 <ScalarProperty Name="FIO" ColumnName="FIO" />
                 <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TaskOneProc" FunctionName="Хранилище DBModel.TaskOneProc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.TaskOneProc_Result">
+                <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+                <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Name3" ColumnName="Name3" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

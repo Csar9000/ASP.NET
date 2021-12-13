@@ -14,11 +14,10 @@ namespace Duble2.Models
     public partial class TaskOneProc_Result
     {
         public string Group_2_GroupNum { get; set; }
-        public int NumberOfCreditBook { get; set; }
+        public Nullable<int> NumberOfCreditBook { get; set; }
         public string FIO { get; set; }
-        public string Subject{ get; set; }
         public int count { get; set; }
-        public int Name3 { get; set; }
-
+        public string SubjectName { get; set; }
+        public Nullable<int> Name3 { get; set; }
     }
 }

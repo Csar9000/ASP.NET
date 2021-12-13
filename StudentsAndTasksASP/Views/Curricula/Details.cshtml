@@ -1,0 +1,35 @@
+﻿@model Duble2.Models.Curriculum
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Curriculum</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Group_2.GroupNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Group_2.GroupNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject_SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject_SubjectName)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Group_2_GroupNum,id2 = Model.Subject_SubjectName  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

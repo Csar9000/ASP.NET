@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Teacher";
+}
+
+<h2>@ViewBag.Title</h2>
+
+{
+<h4>Create a new account.</h4>
+<hr />
+
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Домашние задания", "Index", "Home")</li>
+    <li>@Html.ActionLink("Преподаватели", "About", "Home")</li>
+    <li>@Html.ActionLink("Учебное расписание", "Contact", "Home")</li>
+    <li>@Html.ActionLink("Студенты", "Index", "Students")</li>
+</ul>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-primary" value="Register" />
+    </div>
+</div>
+}

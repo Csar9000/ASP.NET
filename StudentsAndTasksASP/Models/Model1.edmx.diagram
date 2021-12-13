@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9e01cde5afa4009affb65f838f9234c" Name="Diagram1">
+        <EntityTypeShape EntityType="DBModel.Curriculum" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Group_2" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Student" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Student_has_Tasks" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Subject" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Tasks" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Group__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Subje__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Subje__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Subje__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Curriculu__Subje__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Student__Group_2__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Student_h__Stude__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Student_h__Tasks__45BE5BA9" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__Tasks__Subject_S__3587F3E0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Duble2.Models.Tasks>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject.TeachersFIO)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.TeachersFIO)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idTaskNumber }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idTaskNumber }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idTaskNumber })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model Duble2.Models.Tasks
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tasks</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject.TeachersFIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject.TeachersFIO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idTaskNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

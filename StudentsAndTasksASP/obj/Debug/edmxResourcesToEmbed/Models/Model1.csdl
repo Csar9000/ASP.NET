@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Curriculum">
+    <Key>
+      <PropertyRef Name="Group_2_GroupNum" />
+      <PropertyRef Name="Subject_SubjectName" />
+    </Key>
+    <Property Name="Group_2_GroupNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Subject_SubjectName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Group_2" Relationship="Self.FK__Curriculu__Group__3C34F16F" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Group_21" Relationship="Self.FK__Curriculu__Group__3D2915A8" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Group_22" Relationship="Self.FK__Curriculu__Group__503BEA1C" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Group_23" Relationship="Self.FK__Curriculu__Group__51300E55" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Group_24" Relationship="Self.FK__Curriculu__Group__55009F39" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Group_25" Relationship="Self.FK__Curriculu__Group__55F4C372" FromRole="Curriculum" ToRole="Group_2" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Curriculu__Subje__3E1D39E1" FromRole="Curriculum" ToRole="Subject" />
+    <NavigationProperty Name="Subject1" Relationship="Self.FK__Curriculu__Subje__3F115E1A" FromRole="Curriculum" ToRole="Subject" />
+    <NavigationProperty Name="Subject2" Relationship="Self.FK__Curriculu__Subje__5224328E" FromRole="Curriculum" ToRole="Subject" />
+    <NavigationProperty Name="Subject3" Relationship="Self.FK__Curriculu__Subje__531856C7" FromRole="Curriculum" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Group_2">
+    <Key>
+      <PropertyRef Name="GroupNum" />
+    </Key>
+    <Property Name="GroupNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MajorName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Year_2" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Curriculum" Relationship="Self.FK__Curriculu__Group__3C34F16F" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum1" Relationship="Self.FK__Curriculu__Group__3D2915A8" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum2" Relationship="Self.FK__Curriculu__Group__503BEA1C" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum3" Relationship="Self.FK__Curriculu__Group__51300E55" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum4" Relationship="Self.FK__Curriculu__Group__55009F39" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum5" Relationship="Self.FK__Curriculu__Group__55F4C372" FromRole="Group_2" ToRole="Curriculum" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__Student__Group_2__41EDCAC5" FromRole="Group_2" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="NumberOfCreditBook" />
+    </Key>
+    <Property Name="NumberOfCreditBook" Type="Int32" Nullable="false" />
+    <Property Name="Group_2_GroupNum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Group_2" Relationship="Self.FK__Student__Group_2__41EDCAC5" FromRole="Student" ToRole="Group_2" />
+    <NavigationProperty Name="Student_has_Tasks" Relationship="Self.FK__Student_h__Stude__44CA3770" FromRole="Student" ToRole="Student_has_Tasks" />
+  </EntityType>
+  <EntityType Name="Student_has_Tasks">
+    <Key>
+      <PropertyRef Name="Student_NumberOfCreditBook" />
+      <PropertyRef Name="Tasks_idTaskNumber" />
+    </Key>
+    <Property Name="Student_NumberOfCreditBook" Type="Int32" Nullable="false" />
+    <Property Name="Tasks_idTaskNumber" Type="Int32" Nullable="false" />
+    <Property Name="TaskPassDate" Type="DateTime" Precision="0" />
+    <Property Name="TaskGetDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__Student_h__Stude__44CA3770" FromRole="Student_has_Tasks" ToRole="Student" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK__Student_h__Tasks__45BE5BA9" FromRole="Student_has_Tasks" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectName" />
+    </Key>
+    <Property Name="SubjectName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TeachersFIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Curriculum" Relationship="Self.FK__Curriculu__Subje__3E1D39E1" FromRole="Subject" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum1" Relationship="Self.FK__Curriculu__Subje__3F115E1A" FromRole="Subject" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum2" Relationship="Self.FK__Curriculu__Subje__5224328E" FromRole="Subject" ToRole="Curriculum" />
+    <NavigationProperty Name="Curriculum3" Relationship="Self.FK__Curriculu__Subje__531856C7" FromRole="Subject" ToRole="Curriculum" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__Subject_S__3587F3E0" FromRole="Subject" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="idTaskNumber" />
+    </Key>
+    <Property Name="idTaskNumber" Type="Int32" Nullable="false" />
+    <Property Name="TaskNumber" Type="Int16" Nullable="false" />
+    <Property Name="Subject_SubjectName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Summary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Student_has_Tasks" Relationship="Self.FK__Student_h__Tasks__45BE5BA9" FromRole="Tasks" ToRole="Student_has_Tasks" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK__Tasks__Subject_S__3587F3E0" FromRole="Tasks" ToRole="Subject" />
+  </EntityType>
+  <Association Name="FK__Curriculu__Group__3C34F16F">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Group__3D2915A8">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Group__503BEA1C">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Group__51300E55">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Group__55009F39">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Group__55F4C372">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Subje__3E1D39E1">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectName" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Subject_SubjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Subje__3F115E1A">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectName" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Subject_SubjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Subje__5224328E">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectName" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Subject_SubjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curriculu__Subje__531856C7">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Curriculum" Type="Self.Curriculum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectName" />
+      </Principal>
+      <Dependent Role="Curriculum">
+        <PropertyRef Name="Subject_SubjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__Group_2__41EDCAC5">
+    <End Role="Group_2" Type="Self.Group_2" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_2">
+        <PropertyRef Name="GroupNum" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="Group_2_GroupNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student_h__Stude__44CA3770">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student_has_Tasks" Type="Self.Student_has_Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="NumberOfCreditBook" />
+      </Principal>
+      <Dependent Role="Student_has_Tasks">
+        <PropertyRef Name="Student_NumberOfCreditBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student_h__Tasks__45BE5BA9">
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+    <End Role="Student_has_Tasks" Type="Self.Student_has_Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tasks">
+        <PropertyRef Name="idTaskNumber" />
+      </Principal>
+      <Dependent Role="Student_has_Tasks">
+        <PropertyRef Name="Tasks_idTaskNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tasks__Subject_S__3587F3E0">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectName" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="Subject_SubjectName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Curriculum" EntityType="Self.Curriculum" />
+    <EntitySet Name="Group_2" EntityType="Self.Group_2" />
+    <EntitySet Name="Student" EntityType="Self.Student" />
+    <EntitySet Name="Student_has_Tasks" EntityType="Self.Student_has_Tasks" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" />
+    <AssociationSet Name="FK__Curriculu__Group__3C34F16F" Association="Self.FK__Curriculu__Group__3C34F16F">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Group__3D2915A8" Association="Self.FK__Curriculu__Group__3D2915A8">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Group__503BEA1C" Association="Self.FK__Curriculu__Group__503BEA1C">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Group__51300E55" Association="Self.FK__Curriculu__Group__51300E55">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Group__55009F39" Association="Self.FK__Curriculu__Group__55009F39">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Group__55F4C372" Association="Self.FK__Curriculu__Group__55F4C372">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Subje__3E1D39E1" Association="Self.FK__Curriculu__Subje__3E1D39E1">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Subje__3F115E1A" Association="Self.FK__Curriculu__Subje__3F115E1A">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Subje__5224328E" Association="Self.FK__Curriculu__Subje__5224328E">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curriculu__Subje__531856C7" Association="Self.FK__Curriculu__Subje__531856C7">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Curriculum" EntitySet="Curriculum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__Group_2__41EDCAC5" Association="Self.FK__Student__Group_2__41EDCAC5">
+      <End Role="Group_2" EntitySet="Group_2" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student_h__Stude__44CA3770" Association="Self.FK__Student_h__Stude__44CA3770">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Student_has_Tasks" EntitySet="Student_has_Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student_h__Tasks__45BE5BA9" Association="Self.FK__Student_h__Tasks__45BE5BA9">
+      <End Role="Tasks" EntitySet="Tasks" />
+      <End Role="Student_has_Tasks" EntitySet="Student_has_Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tasks__Subject_S__3587F3E0" Association="Self.FK__Tasks__Subject_S__3587F3E0">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <FunctionImport Name="ComplexTableGroupSelectProc" ReturnType="Collection(DBModel.ComplexTableGroupSelectProc_Result)" />
+    <FunctionImport Name="CurriculumDeleteProc">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CurriculumInsertProc1">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CurriculumSelectProc" ReturnType="Collection(DBModel.CurriculumSelectProc_Result)" />
+    <FunctionImport Name="CurriculumUpdateProc">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+      <Parameter Name="NewSubjectName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="deleteALLFrom_Group_2" />
+    <FunctionImport Name="FillCurriculum" />
+    <FunctionImport Name="FillGroup" ReturnType="Collection(DBModel.FillGroup_Result)" />
+    <FunctionImport Name="FillStudent" ReturnType="Collection(DBModel.FillStudent_Result)" />
+    <FunctionImport Name="FillStudentHasTasks" />
+    <FunctionImport Name="FillSubject" ReturnType="Collection(String)" />
+    <FunctionImport Name="FillTasks" />
+    <FunctionImport Name="Group_2DeleteProc">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Group_2InsertProc">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+      <Parameter Name="MajorName" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Group_2SelectProc" ReturnType="Collection(DBModel.Group_2SelectProc_Result)" />
+    <FunctionImport Name="GroupUpdateProc">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+      <Parameter Name="NewMajorName" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Student_TaskDeleteProc">
+      <Parameter Name="Student_NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="Tasks_idTaskNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Student_TaskInsertProc">
+      <Parameter Name="Student_NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="Tasks_idTaskNumber" Mode="In" Type="Int32" />
+      <Parameter Name="TaskPassDate" Mode="In" Type="DateTime" />
+      <Parameter Name="TaskGetDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Student_TaskSelectProc" ReturnType="Collection(DBModel.Student_TaskSelectProc_Result)" />
+    <FunctionImport Name="Student_TaskUpdateProc">
+      <Parameter Name="Student_NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="Tasks_idTaskNumber" Mode="In" Type="Int32" />
+      <Parameter Name="TaskPassDate" Mode="In" Type="DateTime" />
+      <Parameter Name="TaskGetDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="StudentDeleteProc">
+      <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StudentInsertProc">
+      <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="NewGroupNum" Mode="In" Type="String" />
+      <Parameter Name="NewFIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="StudentSelectProc" ReturnType="Collection(DBModel.StudentSelectProc_Result)" />
+    <FunctionImport Name="StudentUpdateProc">
+      <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="NewGroupNum" Mode="In" Type="String" />
+      <Parameter Name="NewFIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SubjectDeleteProc">
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+      <Parameter Name="TeachersFIO" Mode="In" Type="String" />
+      <Parameter Name="Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SubjectInsertProc">
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+      <Parameter Name="TeachersFIO" Mode="In" Type="String" />
+      <Parameter Name="Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SubjectSelectProc" ReturnType="Collection(DBModel.SubjectSelectProc_Result)" />
+    <FunctionImport Name="SubjectUpdateProc">
+      <Parameter Name="SubjectName" Mode="In" Type="String" />
+      <Parameter Name="TeachersFIO" Mode="In" Type="String" />
+      <Parameter Name="Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TaskOneProc" ReturnType="Collection(DBModel.TaskOneProc_Result)">
+      <Parameter Name="GroupNum" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TaskOneProcFindNumber">
+      <Parameter Name="NumberOfCreditBook" Mode="In" Type="Int32" />
+      <Parameter Name="Subject" Mode="In" Type="String" />
+      <Parameter Name="DateNow" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="TasksDELETEProc">
+      <Parameter Name="idTaskNumber" Mode="In" Type="Int32" />
+      <Parameter Name="TaskNumber" Mode="In" Type="Int16" />
+      <Parameter Name="Subject_SubjectName" Mode="In" Type="String" />
+      <Parameter Name="Summary" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TasksInsertProc">
+      <Parameter Name="idTaskNumber" Mode="In" Type="Int32" />
+      <Parameter Name="TaskNumber" Mode="In" Type="Int16" />
+      <Parameter Name="Subject_SubjectName" Mode="In" Type="String" />
+      <Parameter Name="Summary" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TasksSelectProc" ReturnType="Collection(DBModel.TasksSelectProc_Result)" />
+    <FunctionImport Name="TasksUPDATEProc">
+      <Parameter Name="idTaskNumber" Mode="In" Type="Int32" />
+      <Parameter Name="TaskNumber" Mode="In" Type="Int16" />
+      <Parameter Name="Subject_SubjectName" Mode="In" Type="String" />
+      <Parameter Name="Summary" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TaskTwoProc1" ReturnType="Collection(DBModel.TaskTwoProc1_Result)">
+      <Parameter Name="Subject" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ComplexTableGroupSelectProc_Result">
+    <Property Type="String" Name="GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="MajorName" Nullable="false" MaxLength="70" />
+    <Property Type="DateTime" Name="Year_2" Nullable="true" />
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TeachersFIO" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Department" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="CurriculumSelectProc_Result">
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="FillGroup_Result">
+    <Property Type="String" Name="PKGroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="MajorName" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="Year_2" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="FillStudent_Result">
+    <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Group_2SelectProc_Result">
+    <Property Type="String" Name="GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="MajorName" Nullable="false" MaxLength="70" />
+    <Property Type="DateTime" Name="Year_2" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Student_TaskSelectProc_Result">
+    <Property Type="Int32" Name="Student_NumberOfCreditBook" Nullable="false" />
+    <Property Type="Int32" Name="Tasks_idTaskNumber" Nullable="false" />
+    <Property Type="DateTime" Name="TaskPassDate" Nullable="true" />
+    <Property Type="DateTime" Name="TaskGetDate" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StudentSelectProc_Result">
+    <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SubjectSelectProc_Result">
+    <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="TeachersFIO" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Department" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="TaskOneProc_Result">
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
+    <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="TasksSelectProc_Result">
+    <Property Type="Int32" Name="idTaskNumber" Nullable="false" />
+    <Property Type="Int16" Name="TaskNumber" Nullable="false" />
+    <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Summary" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="TaskTwoProc1_Result">
+    <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
+    <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
+  </ComplexType>
+</Schema>

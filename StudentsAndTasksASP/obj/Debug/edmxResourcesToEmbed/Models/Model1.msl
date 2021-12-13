@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="Curriculum">
+      <EntityTypeMapping TypeName="DBModel.Curriculum">
+        <MappingFragment StoreEntitySet="Curriculum">
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group_2">
+      <EntityTypeMapping TypeName="DBModel.Group_2">
+        <MappingFragment StoreEntitySet="Group_2">
+          <ScalarProperty Name="GroupNum" ColumnName="GroupNum" />
+          <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+          <ScalarProperty Name="Year_2" ColumnName="Year_2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="DBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student_has_Tasks">
+      <EntityTypeMapping TypeName="DBModel.Student_has_Tasks">
+        <MappingFragment StoreEntitySet="Student_has_Tasks">
+          <ScalarProperty Name="Student_NumberOfCreditBook" ColumnName="Student_NumberOfCreditBook" />
+          <ScalarProperty Name="Tasks_idTaskNumber" ColumnName="Tasks_idTaskNumber" />
+          <ScalarProperty Name="TaskPassDate" ColumnName="TaskPassDate" />
+          <ScalarProperty Name="TaskGetDate" ColumnName="TaskGetDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subject">
+      <EntityTypeMapping TypeName="DBModel.Subject">
+        <MappingFragment StoreEntitySet="Subject">
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="TeachersFIO" ColumnName="TeachersFIO" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="DBModel.Tasks">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="idTaskNumber" ColumnName="idTaskNumber" />
+          <ScalarProperty Name="TaskNumber" ColumnName="TaskNumber" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ComplexTableGroupSelectProc" FunctionName="Хранилище DBModel.ComplexTableGroupSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.ComplexTableGroupSelectProc_Result">
+          <ScalarProperty Name="GroupNum" ColumnName="GroupNum" />
+          <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+          <ScalarProperty Name="Year_2" ColumnName="Year_2" />
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="TeachersFIO" ColumnName="TeachersFIO" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CurriculumDeleteProc" FunctionName="Хранилище DBModel.CurriculumDeleteProc" />
+    <FunctionImportMapping FunctionImportName="CurriculumInsertProc1" FunctionName="Хранилище DBModel.CurriculumInsertProc1" />
+    <FunctionImportMapping FunctionImportName="CurriculumSelectProc" FunctionName="Хранилище DBModel.CurriculumSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.CurriculumSelectProc_Result">
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CurriculumUpdateProc" FunctionName="Хранилище DBModel.CurriculumUpdateProc" />
+    <FunctionImportMapping FunctionImportName="deleteALLFrom_Group_2" FunctionName="Хранилище DBModel.deleteALLFrom_Group_2" />
+    <FunctionImportMapping FunctionImportName="FillCurriculum" FunctionName="Хранилище DBModel.FillCurriculum" />
+    <FunctionImportMapping FunctionImportName="FillGroup" FunctionName="Хранилище DBModel.FillGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.FillGroup_Result">
+          <ScalarProperty Name="PKGroupNum" ColumnName="PKGroupNum" />
+          <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+          <ScalarProperty Name="Year_2" ColumnName="Year_2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="FillStudent" FunctionName="Хранилище DBModel.FillStudent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.FillStudent_Result">
+          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="FillStudentHasTasks" FunctionName="Хранилище DBModel.FillStudentHasTasks" />
+    <FunctionImportMapping FunctionImportName="FillSubject" FunctionName="Хранилище DBModel.FillSubject" />
+    <FunctionImportMapping FunctionImportName="FillTasks" FunctionName="Хранилище DBModel.FillTasks" />
+    <FunctionImportMapping FunctionImportName="Group_2DeleteProc" FunctionName="Хранилище DBModel.Group_2DeleteProc" />
+    <FunctionImportMapping FunctionImportName="Group_2InsertProc" FunctionName="Хранилище DBModel.Group_2InsertProc" />
+    <FunctionImportMapping FunctionImportName="Group_2SelectProc" FunctionName="Хранилище DBModel.Group_2SelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.Group_2SelectProc_Result">
+          <ScalarProperty Name="GroupNum" ColumnName="GroupNum" />
+          <ScalarProperty Name="MajorName" ColumnName="MajorName" />
+          <ScalarProperty Name="Year_2" ColumnName="Year_2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GroupUpdateProc" FunctionName="Хранилище DBModel.GroupUpdateProc" />
+    <FunctionImportMapping FunctionImportName="Student_TaskDeleteProc" FunctionName="Хранилище DBModel.Student_TaskDeleteProc" />
+    <FunctionImportMapping FunctionImportName="Student_TaskInsertProc" FunctionName="Хранилище DBModel.Student_TaskInsertProc" />
+    <FunctionImportMapping FunctionImportName="Student_TaskSelectProc" FunctionName="Хранилище DBModel.Student_TaskSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.Student_TaskSelectProc_Result">
+          <ScalarProperty Name="Student_NumberOfCreditBook" ColumnName="Student_NumberOfCreditBook" />
+          <ScalarProperty Name="Tasks_idTaskNumber" ColumnName="Tasks_idTaskNumber" />
+          <ScalarProperty Name="TaskPassDate" ColumnName="TaskPassDate" />
+          <ScalarProperty Name="TaskGetDate" ColumnName="TaskGetDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Student_TaskUpdateProc" FunctionName="Хранилище DBModel.Student_TaskUpdateProc" />
+    <FunctionImportMapping FunctionImportName="StudentDeleteProc" FunctionName="Хранилище DBModel.StudentDeleteProc" />
+    <FunctionImportMapping FunctionImportName="StudentInsertProc" FunctionName="Хранилище DBModel.StudentInsertProc" />
+    <FunctionImportMapping FunctionImportName="StudentSelectProc" FunctionName="Хранилище DBModel.StudentSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.StudentSelectProc_Result">
+          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="StudentUpdateProc" FunctionName="Хранилище DBModel.StudentUpdateProc" />
+    <FunctionImportMapping FunctionImportName="SubjectDeleteProc" FunctionName="Хранилище DBModel.SubjectDeleteProc" />
+    <FunctionImportMapping FunctionImportName="SubjectInsertProc" FunctionName="Хранилище DBModel.SubjectInsertProc" />
+    <FunctionImportMapping FunctionImportName="SubjectSelectProc" FunctionName="Хранилище DBModel.SubjectSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.SubjectSelectProc_Result">
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="TeachersFIO" ColumnName="TeachersFIO" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SubjectUpdateProc" FunctionName="Хранилище DBModel.SubjectUpdateProc" />
+    <FunctionImportMapping FunctionImportName="TaskOneProc" FunctionName="Хранилище DBModel.TaskOneProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.TaskOneProc_Result">
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TaskOneProcFindNumber" FunctionName="Хранилище DBModel.TaskOneProcFindNumber" />
+    <FunctionImportMapping FunctionImportName="TasksDELETEProc" FunctionName="Хранилище DBModel.TasksDELETEProc" />
+    <FunctionImportMapping FunctionImportName="TasksInsertProc" FunctionName="Хранилище DBModel.TasksInsertProc" />
+    <FunctionImportMapping FunctionImportName="TasksSelectProc" FunctionName="Хранилище DBModel.TasksSelectProc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.TasksSelectProc_Result">
+          <ScalarProperty Name="idTaskNumber" ColumnName="idTaskNumber" />
+          <ScalarProperty Name="TaskNumber" ColumnName="TaskNumber" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+          <ScalarProperty Name="Summary" ColumnName="Summary" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TasksUPDATEProc" FunctionName="Хранилище DBModel.TasksUPDATEProc" />
+    <FunctionImportMapping FunctionImportName="TaskTwoProc1" FunctionName="Хранилище DBModel.TaskTwoProc1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.TaskTwoProc1_Result">
+          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
+          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

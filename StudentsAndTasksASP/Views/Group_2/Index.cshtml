@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Duble2.Models.Group_2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroupNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MajorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Year_2)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupNum)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MajorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year_2)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.GroupNum }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.GroupNum }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.GroupNum })
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+        <a class="btn btn-primary" href="@Url.Action("Create","Students")">Learn more &raquo;</a>
+
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Duble2.Models.Student_has_Tasks>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Student.NumberOfCreditBook)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tasks.idTaskNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskGetDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskPassDate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student_NumberOfCreditBook)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tasks.idTaskNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskGetDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskPassDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.Student_NumberOfCreditBook ,id2 = item.Tasks_idTaskNumber }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+        <a class="btn btn-primary" href="@Url.Action("Create","Student_has_Tasks")">Learn more &raquo;</a>
+
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>

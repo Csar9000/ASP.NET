@@ -16,13 +16,13 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.idTaskNumber)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.TaskNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Summary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject.TeachersFIO)
         </th>
         <th></th>
     </tr>
@@ -31,13 +31,13 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.idTaskNumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TaskNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Summary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject.TeachersFIO)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.idTaskNumber }) |
@@ -48,3 +48,5 @@
     }
 
 </table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

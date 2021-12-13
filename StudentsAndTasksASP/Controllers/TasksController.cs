@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Duble2.Models;
+using PagedList;
 
 namespace Duble2.Controllers
 {
@@ -15,10 +17,15 @@ namespace Duble2.Controllers
         private Entities1 db = new Entities1();
 
         // GET: Tasks
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var tasks = db.Tasks.Include(t => t.Subject);
-            return View(tasks.ToList());
+            tasks = tasks.OrderBy(x => x.idTaskNumber);
+
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(tasks.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Tasks/Details/5
@@ -39,7 +46,7 @@ namespace Duble2.Controllers
         // GET: Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO");
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName");
             return View();
         }
 
@@ -50,14 +57,21 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idTaskNumber,TaskNumber,Subject_SubjectName,Summary")] Tasks tasks)
         {
-            if (ModelState.IsValid)
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(tasks);
+
+
+            if (Validator.TryValidateObject(tasks, context, results, true))
             {
-                db.Tasks.Add(tasks);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.TasksInsertProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", tasks.Subject_SubjectName);
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
             return View(tasks);
         }
 
@@ -73,7 +87,7 @@ namespace Duble2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", tasks.Subject_SubjectName);
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
             return View(tasks);
         }
 
@@ -84,13 +98,20 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idTaskNumber,TaskNumber,Subject_SubjectName,Summary")] Tasks tasks)
         {
-            if (ModelState.IsValid)
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(tasks);
+
+
+            if (Validator.TryValidateObject(tasks, context, results, true))
             {
-                db.Entry(tasks).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.TasksUPDATEProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", tasks.Subject_SubjectName);
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
             return View(tasks);
         }
 
@@ -115,7 +136,7 @@ namespace Duble2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Tasks tasks = db.Tasks.Find(id);
-            db.Tasks.Remove(tasks);
+            db.TasksDELETEProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

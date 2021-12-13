@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Duble2.Models.TaskOneProc_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group_2_GroupNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfCreditBook)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FIO)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group_2_GroupNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfCreditBook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIO)
+            </td>
+            <td>
+
+            </td>
+        </tr>
+            }
+
+        </table>
+        <form action="http://localhost:53013/Task1/TestMethod">
+            <input name="searchString">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group_2_GroupNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfCreditBook)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FIO)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Group_2_GroupNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfCreditBook)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FIO)
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <form action="http://localhost:53013/Task1/TestMethod">
+            <input name="searchString">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+</div>
+

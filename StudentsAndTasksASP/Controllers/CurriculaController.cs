@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,8 +49,8 @@ namespace Duble2.Controllers
         // GET: Curricula/Create
         public ActionResult Create()
         {
-            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName");
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO");
+            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum");
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName");
 
             return View();
         }
@@ -70,15 +71,15 @@ namespace Duble2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Curriculum.Add(curriculum);
+                    db.CurriculumInsertProc1(curriculum.Group_2_GroupNum,curriculum.Subject_SubjectName);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
 
-            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
+            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
 
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", curriculum.Subject_SubjectName);
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", curriculum.Subject_SubjectName);
 
             return View(curriculum);
         }
@@ -95,9 +96,10 @@ namespace Duble2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
 
-            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", curriculum.Subject_SubjectName);
+            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
+
+            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", curriculum.Subject_SubjectName);
 
             return View(curriculum);
         }
@@ -118,9 +120,17 @@ namespace Duble2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.CurriculumUpdateProc(curriculum.Group_2_GroupNum, curriculum.Subject_SubjectName, curriculum.Subject_SubjectName);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        db.CurriculumUpdateProc(curriculum.Group_2_GroupNum, curriculum.Subject_SubjectName, curriculum.Subject_SubjectName);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (SqlException ex)
+                    {
+                        Response.Write("<script>alert('ex');</script>");
+                    }
+
                 }
             }
             ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
@@ -129,6 +139,7 @@ namespace Duble2.Controllers
 
             return View(curriculum);
         }
+
 
         // GET: Curricula/Delete/5
         public ActionResult Delete(string id, string id2)
@@ -151,7 +162,7 @@ namespace Duble2.Controllers
         public ActionResult DeleteConfirmed(string id, string id2)
         {
             Curriculum curriculum = db.Curriculum.Find(id,id2);
-            db.Curriculum.Remove(curriculum);
+            db.CurriculumDeleteProc(curriculum.Group_2_GroupNum,curriculum.Subject_SubjectName);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

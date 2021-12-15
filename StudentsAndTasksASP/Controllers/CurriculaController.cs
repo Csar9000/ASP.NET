@@ -16,7 +16,8 @@ namespace Duble2.Controllers
     public class CurriculaController : Controller
     {
         private Entities1 db = new Entities1();
-
+        public string str = "";
+        public string str2 = "";
         // GET: Curricula
         public ActionResult Index(int? page)
         {
@@ -91,12 +92,21 @@ namespace Duble2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+
+            str = id;
+            str2 = id2;
             Curriculum curriculum = db.Curriculum.Find(id,id2);
+
+            ViewBag.Message = id2;
+
+            str = curriculum.Group_2_GroupNum;
+            str2 = curriculum.Subject_SubjectName;
             if (curriculum == null)
             {
                 return HttpNotFound();
             }
-
+            
             ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
 
             ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", curriculum.Subject_SubjectName);
@@ -109,7 +119,7 @@ namespace Duble2.Controllers
         // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Group_2_GroupNum,Subject_SubjectName")] Curriculum curriculum)
+        public ActionResult Edit([Bind(Include = "Group_2_GroupNum,Subject_SubjectName")] Curriculum curriculum, string PlayerID)
         {
             var results = new List<ValidationResult>();
             var context = new ValidationContext(curriculum);
@@ -122,7 +132,8 @@ namespace Duble2.Controllers
                 {
                     try
                     {
-                        db.CurriculumUpdateProc(curriculum.Group_2_GroupNum, curriculum.Subject_SubjectName, curriculum.Subject_SubjectName);
+
+                        var g = db.CurriculumUpdateProc(curriculum.Group_2_GroupNum, PlayerID, curriculum.Subject_SubjectName);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }

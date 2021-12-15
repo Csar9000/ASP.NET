@@ -115,16 +115,20 @@
         <div>
             @using (Html.BeginForm("Index2", "Task1", FormMethod.Post))
             {
-                <table>
-                    <tr>
-                        <td><p>Группа</p></td>
-                        <td><input type="text" name="groupNum2" /></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Найти" /></td>
-                        <td></td>
-                    </tr>
-                </table>
+            <table>
+                <tr>
+                    <td><p>Группа</p></td>
+                    <td><input type="text" name="groupNum2" /></td>
+                </tr>
+                <tr>
+                    <td><p>Число заданий</p></td>
+                    <td><input type="text" name="taskNum" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Найти" /></td>
+                    <td></td>
+                </tr>
+            </table>
             }
         </div>
         @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index2", new { page }))

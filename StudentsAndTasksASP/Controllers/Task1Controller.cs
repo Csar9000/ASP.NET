@@ -15,29 +15,35 @@ namespace Duble2.Controllers
     {
         private Entities1 db = new Entities1();
 
+        private string oldGroupnum = "";
+
         // GET: Task1
-        public ActionResult Index(string groupNum,string groupNum2, int? page)
+        public ActionResult Index(string groupNum, int? page)
         {
-            if (groupNum != "")
+            var g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
+            //asu-22-1
+            //groupNum = "asu-22-102";
+
+            if (!String.IsNullOrEmpty(groupNum))
             {
-                var g = db.TaskOneProc(groupNum).OrderBy(x=>x.SubjectName).ToList();
+                oldGroupnum = groupNum;
 
-                int pageSize = 10;
-                int pageNumber = (page ?? 1);
-                return View(g.ToPagedList(pageNumber, pageSize));
-
+                g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
             }
             else
             {
-                var rgroup = db.TaskOneProc(groupNum);
-                return View(rgroup.ToList());
-                //group = db.Group_2.Include(s => s.Student).Take(10);
-            }    
+                g = db.TaskOneProc(oldGroupnum).OrderBy(x => x.SubjectName).ToList();
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(g.ToPagedList(pageNumber, pageSize));
+
         }
         // GET: Task1
-        public ActionResult Index2(string groupNum2, int? page)
+        public ActionResult Index2(string groupNum2,string taskNum, int? page)
         {
-            if (groupNum2 != "")
+            if (groupNum2 != null)
             {
                 var g = db.TaskOneProc(groupNum2).OrderBy(x => x.SubjectName).ToList();
 

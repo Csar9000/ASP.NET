@@ -1,0 +1,77 @@
+﻿
+@model PagedList.IPagedList<Duble2.Models.TaskTwoProc1_Result>
+
+
+
+@{
+    ViewBag.Title = "Task2";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2>Index</h2>
+
+<div class="col-md-8">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().NumberOfCreditBook1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().SubjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().count)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfCreditBook1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.count)
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @using (Html.BeginForm("Index", "Task2", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><p>Предмет</p></td>
+                    <td><input type="text" name="subject" /></td>
+                </tr>
+                <tr>
+                    <td><p>Число заданий</p></td>
+                    <td><input type="text" name="Ntasks" /></td>
+                </tr>
+                <tr>
+                    <td><p>Дата выполнения</p></td>
+                    <input class="datefield" data-val="true" data-val-required="Date is required"
+                           id="date" name="date" type="date" />
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Найти" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, SizePage = @Model.PageSize, lastSub = ViewBag.CurrentSub, lastNtasks = ViewBag.CurrentNtasks,lastDate = ViewBag.CurrentLastDate }))
+
+</div>

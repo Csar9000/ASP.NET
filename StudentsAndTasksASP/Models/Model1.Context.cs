@@ -419,15 +419,6 @@ namespace Duble2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TasksUPDATEProc", idTaskNumberParameter, taskNumberParameter, subject_SubjectNameParameter, summaryParameter);
         }
     
-        public virtual ObjectResult<TaskTwoProc1_Result> TaskTwoProc1(string subject)
-        {
-            var subjectParameter = subject != null ?
-                new ObjectParameter("Subject", subject) :
-                new ObjectParameter("Subject", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskTwoProc1_Result>("TaskTwoProc1", subjectParameter);
-        }
-    
         public virtual ObjectResult<TaskOneProc_Result> TaskOneProc(string groupNum)
         {
             var groupNumParameter = groupNum != null ?
@@ -435,6 +426,25 @@ namespace Duble2.Models
                 new ObjectParameter("GroupNum", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskOneProc_Result>("TaskOneProc", groupNumParameter);
+        }
+    
+        public virtual ObjectResult<TaskTwoProc1_Result> TaskTwoProc1(string subject, Nullable<System.DateTime> date, Nullable<int> number)
+        {
+            var subjectParameter = subject != null ?
+                new ObjectParameter("Subject", subject) :
+                new ObjectParameter("Subject", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            var numberParameter = number.HasValue ?
+                new ObjectParameter("Number", number) :
+                new ObjectParameter("Number", typeof(int));
+
+            this.Database.CommandTimeout = 5000;
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaskTwoProc1_Result>("TaskTwoProc1", subjectParameter, dateParameter, numberParameter);
         }
     }
 }

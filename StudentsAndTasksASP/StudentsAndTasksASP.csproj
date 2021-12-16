@@ -151,6 +151,7 @@
     <Compile Include="Controllers\Student_has_TasksController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\Task1Controller.cs" />
+    <Compile Include="Controllers\Task2Controller.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -307,11 +308,8 @@
     <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Task1\Create.cshtml" />
-    <Content Include="Views\Task1\Delete.cshtml" />
-    <Content Include="Views\Task1\Details.cshtml" />
-    <Content Include="Views\Task1\Edit.cshtml" />
     <Content Include="Views\Task1\Index.cshtml" />
+    <Content Include="Views\Task2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

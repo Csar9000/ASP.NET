@@ -330,7 +330,9 @@
     <Parameter Name="Summary" Type="varchar" Mode="In" />
   </Function>
   <Function Name="TaskTwoProc1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Subject" Type="varchar" Mode="In" />
+    <Parameter Name="Subject" Type="nvarchar" Mode="In" />
+    <Parameter Name="Date" Type="date" Mode="In" />
+    <Parameter Name="Number" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="Хранилище DBModelContainer">
     <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="dbo" store:Type="Tables" />

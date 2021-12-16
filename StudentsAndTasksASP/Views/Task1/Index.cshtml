@@ -10,6 +10,8 @@
 
 <h2>Index</h2>
 
+
+
 <div class="row mb-4">
     <div class="col-md-8 ">
         <table class="table">
@@ -70,68 +72,13 @@
                         <td><input type="submit" value="Найти" /></td>
                         <td></td>
                     </tr>
+
                 </table>
             }
-            </div>
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
-    </div>
 
-
-    <div class="col-md-8">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Group_2_GroupNum)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumberOfCreditBook)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FIO)
-                </th>
-                <th>
-
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Group_2_GroupNum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumberOfCreditBook)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FIO)
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            }
-
-        </table>
-        <div>
-            @using (Html.BeginForm("Index2", "Task1", FormMethod.Post))
-            {
-            <table>
-                <tr>
-                    <td><p>Группа</p></td>
-                    <td><input type="text" name="groupNum2" /></td>
-                </tr>
-                <tr>
-                    <td><p>Число заданий</p></td>
-                    <td><input type="text" name="taskNum" /></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Найти" /></td>
-                    <td></td>
-                </tr>
-            </table>
-            }
         </div>
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index2", new { page }))
+
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Page", new { list = ViewContext.ViewBag.PagedList, page }))
 
     </div>
 </div>

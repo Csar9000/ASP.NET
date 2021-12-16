@@ -167,16 +167,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="TasksUPDATEProc" FunctionName="Хранилище DBModel.TasksUPDATEProc" />
-    <FunctionImportMapping FunctionImportName="TaskTwoProc1" FunctionName="Хранилище DBModel.TaskTwoProc1">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DBModel.TaskTwoProc1_Result">
-          <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
-          <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
-          <ScalarProperty Name="FIO" ColumnName="FIO" />
-          <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="TaskOneProc" FunctionName="Хранилище DBModel.TaskOneProc">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DBModel.TaskOneProc_Result">
@@ -186,6 +176,15 @@
           <ScalarProperty Name="count" ColumnName="count" />
           <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
           <ScalarProperty Name="Name3" ColumnName="Name3" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TaskTwoProc1" FunctionName="Хранилище DBModel.TaskTwoProc1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DBModel.TaskTwoProc1_Result">
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="NumberOfCreditBook1" ColumnName="NumberOfCreditBook1" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

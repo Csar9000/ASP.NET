@@ -10,12 +10,13 @@
 namespace Duble2.Models
 {
     using System;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TaskTwoProc1_Result
     {
-        public string Group_2_GroupNum { get; set; }
-        public int NumberOfCreditBook { get; set; }
-        public string FIO { get; set; }
-        public string Subject_SubjectName { get; set; }
+        public int count { get; set; }
+        public string SubjectName { get; set; }
+        public Nullable<int> NumberOfCreditBook1 { get; set; }
+
     }
 }

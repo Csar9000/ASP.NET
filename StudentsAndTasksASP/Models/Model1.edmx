@@ -335,7 +335,9 @@
           <Parameter Name="Summary" Type="varchar" Mode="In" />
         </Function>
         <Function Name="TaskTwoProc1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Subject" Type="varchar" Mode="In" />
+          <Parameter Name="Subject" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Number" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище DBModelContainer">
           <EntitySet Name="Curriculum" EntityType="Self.Curriculum" Schema="dbo" store:Type="Tables" />
@@ -822,11 +824,13 @@
             <Parameter Name="Subject_SubjectName" Mode="In" Type="String" />
             <Parameter Name="Summary" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="TaskTwoProc1" ReturnType="Collection(DBModel.TaskTwoProc1_Result)">
-          <Parameter Name="Subject" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="TaskOneProc" ReturnType="Collection(DBModel.TaskOneProc_Result)">
-            <Parameter Name="GroupNum" Mode="In" Type="String" />
+          <Parameter Name="GroupNum" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaskTwoProc1" ReturnType="Collection(DBModel.TaskTwoProc1_Result)">
+            <Parameter Name="Subject" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Number" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ComplexTableGroupSelectProc_Result">
@@ -880,12 +884,6 @@
           <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="Summary" Nullable="true" MaxLength="255" />
         </ComplexType>
-        <ComplexType Name="TaskTwoProc1_Result">
-          <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="NumberOfCreditBook" Nullable="false" />
-          <Property Type="String" Name="FIO" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Subject_SubjectName" Nullable="false" MaxLength="20" />
-        </ComplexType>
         <ComplexType Name="TaskOneProc_Result">
           <Property Type="String" Name="Group_2_GroupNum" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="NumberOfCreditBook" Nullable="true" />
@@ -893,6 +891,11 @@
           <Property Type="Int32" Name="count" Nullable="false" />
           <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="30" />
           <Property Type="Int32" Name="Name3" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TaskTwoProc1_Result">
+          <Property Type="Int32" Name="count" Nullable="false" />
+          <Property Type="String" Name="SubjectName" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="NumberOfCreditBook1" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1066,16 +1069,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TasksUPDATEProc" FunctionName="Хранилище DBModel.TasksUPDATEProc" />
-          <FunctionImportMapping FunctionImportName="TaskTwoProc1" FunctionName="Хранилище DBModel.TaskTwoProc1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DBModel.TaskTwoProc1_Result">
-                <ScalarProperty Name="Group_2_GroupNum" ColumnName="Group_2_GroupNum" />
-                <ScalarProperty Name="NumberOfCreditBook" ColumnName="NumberOfCreditBook" />
-                <ScalarProperty Name="FIO" ColumnName="FIO" />
-                <ScalarProperty Name="Subject_SubjectName" ColumnName="Subject_SubjectName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TaskOneProc" FunctionName="Хранилище DBModel.TaskOneProc">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DBModel.TaskOneProc_Result">
@@ -1085,6 +1078,15 @@
                 <ScalarProperty Name="count" ColumnName="count" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
                 <ScalarProperty Name="Name3" ColumnName="Name3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TaskTwoProc1" FunctionName="Хранилище DBModel.TaskTwoProc1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.TaskTwoProc1_Result">
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="NumberOfCreditBook1" ColumnName="NumberOfCreditBook1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

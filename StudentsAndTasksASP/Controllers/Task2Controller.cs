@@ -20,8 +20,6 @@ namespace Duble2.Controllers
         // GET: Task2
         public ActionResult Index(string subject, Nullable<int> Ntasks, Nullable<DateTime> date,string lastSub, Nullable<int> lastNtasks, Nullable<DateTime> lastDate, int? page)
         {
-
-
             if (subject != null && Ntasks!= null && date!=null)
             {
                 page = 1;
@@ -44,13 +42,6 @@ namespace Duble2.Controllers
               int pageSize = 10;
               int pageNumber = (page ?? 1);
               return View(g.ToPagedList(pageNumber, pageSize));
-        }
-
-        public ActionResult Page(List<TaskTwoProc1_Result> list, int? page)
-        {
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(list.ToPagedList(pageNumber, pageSize));
         }
 
     }

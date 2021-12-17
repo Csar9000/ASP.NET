@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -30,13 +31,13 @@ namespace Duble2.Controllers
         }
 
         // GET: Student_has_Tasks/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? id2)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id);
+            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id,id2);
             if (student_has_Tasks == null)
             {
                 return HttpNotFound();
@@ -64,11 +65,42 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Student_NumberOfCreditBook,Tasks_idTaskNumber,TaskPassDate,TaskGetDate")] Student_has_Tasks student_has_Tasks)
         {
-            if (ModelState.IsValid)
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(student_has_Tasks);
+
+
+            try
             {
-                db.Student_has_Tasks.Add(student_has_Tasks);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Validator.TryValidateObject(student_has_Tasks, context, results, true))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Student_TaskInsertProc(student_has_Tasks.Student_NumberOfCreditBook, student_has_Tasks.Tasks_idTaskNumber, student_has_Tasks.TaskPassDate, student_has_Tasks.TaskGetDate);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+                    ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
+                    ViewBag.Tasks_idTaskNumber = new SelectList(db.Tasks, "idTaskNumber", "Subject_SubjectName", student_has_Tasks.Tasks_idTaskNumber);
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+                ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
+                ViewBag.Tasks_idTaskNumber = new SelectList(db.Tasks, "idTaskNumber", "Subject_SubjectName", student_has_Tasks.Tasks_idTaskNumber);
+                return View();
             }
 
             ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
@@ -100,25 +132,59 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Student_NumberOfCreditBook,Tasks_idTaskNumber,TaskPassDate,TaskGetDate")] Student_has_Tasks student_has_Tasks)
         {
-            if (ModelState.IsValid)
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(student_has_Tasks);
+
+
+            try
             {
-                db.Entry(student_has_Tasks).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (Validator.TryValidateObject(student_has_Tasks, context, results, true))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Student_TaskUpdateProc(student_has_Tasks.Student_NumberOfCreditBook, student_has_Tasks.Tasks_idTaskNumber, student_has_Tasks.TaskPassDate, student_has_Tasks.TaskGetDate);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
             }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+                    ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
+                    ViewBag.Tasks_idTaskNumber = new SelectList(db.Tasks, "idTaskNumber", "Subject_SubjectName", student_has_Tasks.Tasks_idTaskNumber);
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+                ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
+                ViewBag.Tasks_idTaskNumber = new SelectList(db.Tasks, "idTaskNumber", "Subject_SubjectName", student_has_Tasks.Tasks_idTaskNumber);
+                return View();
+            }
+
+
+
             ViewBag.Student_NumberOfCreditBook = new SelectList(db.Student, "NumberOfCreditBook", "Group_2_GroupNum", student_has_Tasks.Student_NumberOfCreditBook);
             ViewBag.Tasks_idTaskNumber = new SelectList(db.Tasks, "idTaskNumber", "Subject_SubjectName", student_has_Tasks.Tasks_idTaskNumber);
             return View(student_has_Tasks);
         }
 
         // GET: Student_has_Tasks/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id,int? id2)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id);
+            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id, id2);
             if (student_has_Tasks == null)
             {
                 return HttpNotFound();
@@ -129,10 +195,10 @@ namespace Duble2.Controllers
         // POST: Student_has_Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id,int id2)
         {
-            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id);
-            db.Student_has_Tasks.Remove(student_has_Tasks);
+            Student_has_Tasks student_has_Tasks = db.Student_has_Tasks.Find(id,id2);
+            db.Student_TaskDeleteProc(student_has_Tasks.Student_NumberOfCreditBook,student_has_Tasks.Tasks_idTaskNumber);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

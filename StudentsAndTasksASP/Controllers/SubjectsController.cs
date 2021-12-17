@@ -49,19 +49,40 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SubjectName,TeachersFIO,Department")] Subject subject)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                var results = new List<ValidationResult>();
-                var context = new ValidationContext(subject);
-
-
-                if (Validator.TryValidateObject(subject, context, results, true))
+                if (ModelState.IsValid)
                 {
-                    //db.Subject.Add(subject);
-                    db.SubjectInsertProc(subject.SubjectName,subject.TeachersFIO,subject.Department);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    var results = new List<ValidationResult>();
+                    var context = new ValidationContext(subject);
+
+
+                    if (Validator.TryValidateObject(subject, context, results, true))
+                    {
+                        //db.Subject.Add(subject);
+                        db.SubjectInsertProc(subject.SubjectName, subject.TeachersFIO, subject.Department);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View(subject);
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View(subject);
             }
 
             return View(subject);
@@ -92,16 +113,37 @@ namespace Duble2.Controllers
             var results = new List<ValidationResult>();
             var context = new ValidationContext(subject);
 
-
-            if (Validator.TryValidateObject(subject, context, results, true))
+            try
             {
-                if (ModelState.IsValid)
+
+                if (Validator.TryValidateObject(subject, context, results, true))
                 {
-                    // db.Entry(subject).State = EntityState.Modified;
-                    db.SubjectUpdateProc(subject.SubjectName, subject.TeachersFIO, subject.Department);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        // db.Entry(subject).State = EntityState.Modified;
+                        db.SubjectUpdateProc(subject.SubjectName, subject.TeachersFIO, subject.Department);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View(subject);
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View(subject);
             }
             return View(subject);
         }

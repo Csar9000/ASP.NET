@@ -11,7 +11,8 @@ namespace Duble2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,15 @@ namespace Duble2.Models
         {
             this.Student_has_Tasks = new HashSet<Student_has_Tasks>();
         }
-    
+
+        [Required]
+        [Range(10000, 10000000)]
         public int NumberOfCreditBook { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string Group_2_GroupNum { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string FIO { get; set; }
     
         public virtual Group_2 Group_2 { get; set; }

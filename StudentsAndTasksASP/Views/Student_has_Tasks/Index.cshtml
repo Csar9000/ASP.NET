@@ -52,8 +52,8 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id=item.Student_NumberOfCreditBook ,id2 = item.Tasks_idTaskNumber }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        @Html.ActionLink("Details", "Details", new { id = item.Student_NumberOfCreditBook, id2 = item.Tasks_idTaskNumber }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Student_NumberOfCreditBook, id2 = item.Tasks_idTaskNumber })
                     </td>
                 </tr>
             }

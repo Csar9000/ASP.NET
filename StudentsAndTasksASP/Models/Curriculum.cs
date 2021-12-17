@@ -11,10 +11,15 @@ namespace Duble2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Curriculum
     {
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Group_2_GroupNum { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string Subject_SubjectName { get; set; }
     
         public virtual Group_2 Group_2 { get; set; }

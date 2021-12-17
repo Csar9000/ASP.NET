@@ -16,63 +16,31 @@ namespace Duble2.Controllers
         private Entities1 db = new Entities1();
 
 
+
+
         private string oldGroupnum = "";
 
         // GET: Task1
-        public ActionResult Index(string groupNum, int? page)
+        public ActionResult Index(string groupNum,string oldGroupNum, int? page)
         {
 
-            var g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
-            //asu-22-1
-            //groupNum = "asu-22-102";
-
-            if (!String.IsNullOrEmpty(groupNum))
+            if (groupNum != null )
             {
-                oldGroupnum = groupNum;
-
-                g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
+                page = 1;
             }
             else
             {
-                g = db.TaskOneProc(oldGroupnum).OrderBy(x => x.SubjectName).ToList();
+                groupNum = oldGroupNum;
+
             }
+               ViewBag.oldGroupNum = groupNum;
+
+            var g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
+
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(g.ToPagedList(pageNumber, pageSize));
-
-        }
-        // GET: Task1
-        public ActionResult Index2(string groupNum2,string taskNum, int? page)
-        {
-            if (groupNum2 != null)
-            {
-                var g = db.TaskOneProc(groupNum2).OrderBy(x => x.SubjectName).ToList();
-
-                int pageSize = 10;
-                int pageNumber = (page ?? 1);
-                return View(g.ToPagedList(pageNumber, pageSize));
-
-            }
-            else
-            {
-                var rgroup = db.TaskOneProc(groupNum2);
-                return View(rgroup.ToList());
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Task1Query([Bind(Include = "GroupNum,MajorName,Year_2")] Group_2 group_2)
-        {
-            
-            if (ModelState.IsValid)
-            {
-                var l = db.TaskOneProc(group_2.GroupNum);
-            }
-
-
-            return View("Index", group_2);
-        }
+        }     
     }
 }

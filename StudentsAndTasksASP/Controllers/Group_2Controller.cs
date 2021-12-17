@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -56,13 +57,42 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GroupNum,MajorName,Year_2")] Group_2 group_2)
         {
-            if (ModelState.IsValid)
+
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(group_2);
+
+
+            try
             {
-                db.Group_2InsertProc(group_2.GroupNum,group_2.MajorName,group_2.Year_2);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Validator.TryValidateObject(group_2, context, results, true))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Group_2InsertProc(group_2.GroupNum, group_2.MajorName, group_2.Year_2);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                }
             }
 
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View(group_2);
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View(group_2);
+            }
             return View(group_2);
         }
 
@@ -88,11 +118,38 @@ namespace Duble2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GroupNum,MajorName,Year_2")] Group_2 group_2)
         {
-            if (ModelState.IsValid)
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(group_2);
+
+            try
             {
-                db.GroupUpdateProc(group_2.GroupNum,group_2.MajorName,group_2.Year_2);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Validator.TryValidateObject(group_2, context, results, true))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.GroupUpdateProc(group_2.GroupNum, group_2.MajorName, group_2.Year_2);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View();
             }
             return View(group_2);
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Duble2.Models.Curriculum>
+﻿@model PagedList.PagedList<Duble2.Models.Curriculum>
 
 @{
     ViewBag.Title = "Index";
@@ -20,10 +20,10 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Group_2_GroupNum)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Group_2_GroupNum)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Subject_SubjectName)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Subject_SubjectName)
                 </th>
                 <th></th>
             </tr>
@@ -47,7 +47,7 @@
         </table>
 
 
-        <a class="btn btn-primary" href="@Url.Action("Create","Students")">Create &raquo;</a>
+        <a class="btn btn-primary" href="@Url.Action("Create","Curricula")">Create &raquo;</a>
 
         @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
     </div>

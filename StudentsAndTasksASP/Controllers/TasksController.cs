@@ -22,6 +22,7 @@ namespace Duble2.Controllers
             var tasks = db.Tasks.Include(t => t.Subject);
             tasks = tasks.OrderBy(x => x.idTaskNumber);
 
+            db.Database.CommandTimeout = 5000;
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -61,14 +62,37 @@ namespace Duble2.Controllers
             var context = new ValidationContext(tasks);
 
 
-            if (Validator.TryValidateObject(tasks, context, results, true))
+            try
             {
-                if (ModelState.IsValid)
+
+                if (Validator.TryValidateObject(tasks, context, results, true))
                 {
-                    db.TasksInsertProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        db.TasksInsertProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+                    ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+                ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
+                return View();
             }
 
             ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
@@ -101,16 +125,38 @@ namespace Duble2.Controllers
             var results = new List<ValidationResult>();
             var context = new ValidationContext(tasks);
 
-
-            if (Validator.TryValidateObject(tasks, context, results, true))
+            try
             {
-                if (ModelState.IsValid)
+
+                if (Validator.TryValidateObject(tasks, context, results, true))
                 {
-                    db.TasksUPDATEProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        db.TasksUPDATEProc(tasks.idTaskNumber, tasks.TaskNumber, tasks.Subject_SubjectName, tasks.Summary);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+                    ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+                ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
+                return View();
+            }
+
             ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", tasks.Subject_SubjectName);
             return View(tasks);
         }

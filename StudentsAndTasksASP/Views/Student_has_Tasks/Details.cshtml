@@ -34,6 +34,15 @@
             @Html.DisplayFor(model => model.Student.Group_2_GroupNum)
         </dd>
 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.FIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.FIO)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Tasks.Subject_SubjectName)
         </dt>
@@ -45,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.Student_NumberOfCreditBook, id2 = Model.Tasks_idTaskNumber }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

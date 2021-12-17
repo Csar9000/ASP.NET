@@ -19,11 +19,13 @@ namespace Duble2.Models
     {
         public Entities1()
             : base("name=Entities1")
+
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            this.Database.CommandTimeout = 5000;
             throw new UnintentionalCodeFirstException();
         }
     
@@ -38,6 +40,7 @@ namespace Duble2.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComplexTableGroupSelectProc_Result>("ComplexTableGroupSelectProc");
         }
+
     
         public virtual int CurriculumDeleteProc(string groupNum, string subjectName)
         {
@@ -83,8 +86,9 @@ namespace Duble2.Models
             var newSubjectNameParameter = newSubjectName != null ?
                 new ObjectParameter("NewSubjectName", newSubjectName) :
                 new ObjectParameter("NewSubjectName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CurriculumUpdateProc", groupNumParameter, subjectNameParameter, newSubjectNameParameter);
+
+           return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CurriculumUpdateProc", groupNumParameter, subjectNameParameter, newSubjectNameParameter);
+
         }
     
         public virtual int deleteALLFrom_Group_2()
@@ -291,7 +295,9 @@ namespace Duble2.Models
             var departmentParameter = department != null ?
                 new ObjectParameter("Department", department) :
                 new ObjectParameter("Department", typeof(string));
-    
+
+            this.Database.CommandTimeout = 5000;
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubjectDeleteProc", subjectNameParameter, teachersFIOParameter, departmentParameter);
         }
     

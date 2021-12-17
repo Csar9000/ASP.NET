@@ -74,19 +74,42 @@ namespace Duble2.Controllers
             var items = db.Group_2.Select(m => m.GroupNum).Distinct();
             ViewBag.Books = new SelectList(items, "GroupNum");
 
-            if (Validator.TryValidateObject(student, context, results, true))
-            {
-                if (ModelState.IsValid)
-                {
-                    db.StudentInsertProc(student.NumberOfCreditBook,student.Group_2_GroupNum,student.FIO);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
 
-                //ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", student.Group_2_GroupNum);
+            try
+            {
+                if (Validator.TryValidateObject(student, context, results, true))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.StudentInsertProc(student.NumberOfCreditBook, student.Group_2_GroupNum, student.FIO);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    //ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", student.Group_2_GroupNum);
+                }
             }
 
-          
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View(student);
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View(student);
+            }
+
+
+
             return View(student);
         }
 
@@ -126,15 +149,36 @@ namespace Duble2.Controllers
             //ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", student.Group_2_GroupNum);
 
 
-            if (Validator.TryValidateObject(student, context, results, true))
+            try
             {
-                if (ModelState.IsValid)
+                if (Validator.TryValidateObject(student, context, results, true))
                 {
-                    //db.Entry(student).State = EntityState.Modified;
-                    db.StudentUpdateProc(student.NumberOfCreditBook,student.Group_2_GroupNum,student.FIO);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        //db.Entry(student).State = EntityState.Modified;
+                        db.StudentUpdateProc(student.NumberOfCreditBook, student.Group_2_GroupNum, student.FIO);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+
+                    return View(student);
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                return View(student);
             }
 
             return View(student);

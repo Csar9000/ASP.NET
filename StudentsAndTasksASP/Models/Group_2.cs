@@ -26,11 +26,17 @@ namespace Duble2.Models
             this.Curriculum5 = new HashSet<Curriculum>();
             this.Student = new HashSet<Student>();
         }
-    
+
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string GroupNum { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string MajorName { get; set; }
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Год")]
         public Nullable<System.DateTime> Year_2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

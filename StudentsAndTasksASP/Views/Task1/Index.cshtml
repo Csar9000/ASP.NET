@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Duble2.Models.TaskOneProc_Result>
+﻿@model PagedList<Duble2.Models.TaskOneProc_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -17,20 +17,20 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Group_2_GroupNum)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Group_2_GroupNum)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NumberOfCreditBook)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().NumberOfCreditBook)
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.FIO)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().FIO)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SubjectName)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().SubjectName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.count)
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().count)
                 </th>
 
                 <th>
@@ -78,7 +78,7 @@
 
         </div>
 
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Page", new { list = ViewContext.ViewBag.PagedList, page }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, SizePage = @Model.PageSize, oldGroupNum = ViewBag.oldGroupNum }))
 
     </div>
 </div>

@@ -11,7 +11,8 @@ namespace Duble2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Tasks
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,20 @@ namespace Duble2.Models
         {
             this.Student_has_Tasks = new HashSet<Student_has_Tasks>();
         }
-    
+
+
+
+        [Required]
+        [Range(100, 1000000000)]
         public int idTaskNumber { get; set; }
+        [Required]
+        [Range(1, 100000)]
         public short TaskNumber { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string Subject_SubjectName { get; set; }
+        [Required]
+        [StringLength(255, MinimumLength = 5)]
         public string Summary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -25,9 +25,10 @@ namespace Duble2.Controllers
 
             curriculum = curriculum.OrderBy(x => x.Group_2_GroupNum);
 
-
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+            ViewBag.displayGraph = new SelectList(curriculum);
+
             return View(curriculum.ToPagedList(pageNumber, pageSize));
 
         }
@@ -67,15 +68,42 @@ namespace Duble2.Controllers
             var context = new ValidationContext(curriculum);
 
 
-
-            if (Validator.TryValidateObject(curriculum, context, results, true))
+            try
             {
-                if (ModelState.IsValid)
+
+                if (Validator.TryValidateObject(curriculum, context, results, true))
                 {
-                    db.CurriculumInsertProc1(curriculum.Group_2_GroupNum,curriculum.Subject_SubjectName);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        db.CurriculumInsertProc1(curriculum.Group_2_GroupNum, curriculum.Subject_SubjectName);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
+            }
+
+            catch (System.Data.DataException de)
+            {
+                Exception innerException = de;
+                while (innerException.InnerException != null)
+                {
+                    innerException = innerException.InnerException;
+                }
+                if (innerException.Message.Contains("Unique_constraint_name"))
+                {
+                    ModelState.AddModelError(string.Empty, "Error Message");
+                    ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
+
+                    ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", curriculum.Subject_SubjectName);
+                    return View();
+                }
+                ModelState.AddModelError(string.Empty, "Error Message");
+
+                ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
+
+                ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "SubjectName", curriculum.Subject_SubjectName);
+
+                return View();
             }
 
             ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "GroupNum", curriculum.Group_2_GroupNum);
@@ -132,14 +160,36 @@ namespace Duble2.Controllers
                 {
                     try
                     {
-
                         var g = db.CurriculumUpdateProc(curriculum.Group_2_GroupNum, PlayerID, curriculum.Subject_SubjectName);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
-                    catch (SqlException ex)
+                    catch (System.Data.DataException de)
                     {
-                        Response.Write("<script>alert('ex');</script>");
+                        Exception innerException = de;
+                        while (innerException.InnerException != null)
+                        {
+                            innerException = innerException.InnerException;
+                        }
+
+
+                        if (innerException.Message.Contains("Unique_constraint_name"))
+                        {
+                            ModelState.AddModelError(string.Empty, "Error Message");
+                            ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
+                            ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", curriculum.Subject_SubjectName);
+
+                            return View();
+                        }
+
+
+
+                        ModelState.AddModelError(string.Empty, "Error Message");
+
+                        ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
+                        ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", curriculum.Subject_SubjectName);
+
+                        return View();
                     }
 
                 }
@@ -147,6 +197,9 @@ namespace Duble2.Controllers
             ViewBag.Group_2_GroupNum = new SelectList(db.Group_2, "GroupNum", "MajorName", curriculum.Group_2_GroupNum);
 
             ViewBag.Subject_SubjectName = new SelectList(db.Subject, "SubjectName", "TeachersFIO", curriculum.Subject_SubjectName);
+
+
+
 
             return View(curriculum);
         }
@@ -186,5 +239,6 @@ namespace Duble2.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

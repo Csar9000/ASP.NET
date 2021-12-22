@@ -1,15 +1,14 @@
 ﻿@model PagedList<Duble2.Models.TaskOneProc_Result>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Количество заданий";
 }
 
 @using PagedList.Mvc;
 @using PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-<h2>Index</h2>
-
+<h2>@ViewBag.Title</h2>
 
 
 <div class="row mb-4">
@@ -31,10 +30,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FirstOrDefault().count)
-                </th>
-
-                <th>
-
                 </th>
             </tr>
 
@@ -75,11 +70,8 @@
 
                 </table>
             }
-
         </div>
-
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, SizePage = @Model.PageSize, oldGroupNum = ViewBag.oldGroupNum }))
-
     </div>
 </div>
 

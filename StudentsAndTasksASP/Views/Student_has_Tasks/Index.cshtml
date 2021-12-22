@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Duble2.Models.Student_has_Tasks>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Учебный план";
 }
 
 
@@ -57,10 +57,7 @@
                     </td>
                 </tr>
             }
-
         </table>
-
-
         <a class="btn btn-primary" href="@Url.Action("Create","Student_has_Tasks")">Learn more &raquo;</a>
 
         @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))

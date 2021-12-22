@@ -1,15 +1,14 @@
 ﻿@model IEnumerable<Duble2.Models.Student>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Распределение заданий";
 }
 
 @using PagedList.Mvc;
 @using PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-<h2>Index</h2>
-
+<h2>@ViewBag.Title</h2>
 
 <div class="row">
     <div class="col">

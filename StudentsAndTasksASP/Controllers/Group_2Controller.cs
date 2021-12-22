@@ -15,8 +15,6 @@ namespace Duble2.Controllers
     public class Group_2Controller : Controller
     {
         private Entities1 db = new Entities1();
-
-        // GET: Group_2
         public ActionResult Index(int? page)
         {
 
@@ -29,7 +27,6 @@ namespace Duble2.Controllers
             return View(group.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Group_2/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -43,16 +40,10 @@ namespace Duble2.Controllers
             }
             return View(group_2);
         }
-
-        // GET: Group_2/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Group_2/Create
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GroupNum,MajorName,Year_2")] Group_2 group_2)
@@ -96,7 +87,6 @@ namespace Duble2.Controllers
             return View(group_2);
         }
 
-        // GET: Group_2/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -111,16 +101,12 @@ namespace Duble2.Controllers
             return View(group_2);
         }
 
-        // POST: Group_2/Edit/5
-        // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. 
-        // Дополнительные сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GroupNum,MajorName,Year_2")] Group_2 group_2)
         {
             var results = new List<ValidationResult>();
             var context = new ValidationContext(group_2);
-
             try
             {
                 if (Validator.TryValidateObject(group_2, context, results, true))
@@ -154,7 +140,6 @@ namespace Duble2.Controllers
             return View(group_2);
         }
 
-        // GET: Group_2/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -169,7 +154,6 @@ namespace Duble2.Controllers
             return View(group_2);
         }
 
-        // POST: Group_2/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

@@ -15,15 +15,10 @@ namespace Duble2.Controllers
     {
         private Entities1 db = new Entities1();
 
-
-
-
         private string oldGroupnum = "";
 
-        // GET: Task1
         public ActionResult Index(string groupNum,string oldGroupNum, int? page)
         {
-
             if (groupNum != null )
             {
                 page = 1;
@@ -36,7 +31,6 @@ namespace Duble2.Controllers
                ViewBag.oldGroupNum = groupNum;
 
             var g = db.TaskOneProc(groupNum).OrderBy(x => x.SubjectName).ToList();
-
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);

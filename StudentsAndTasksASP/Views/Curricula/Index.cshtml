@@ -1,13 +1,13 @@
 ﻿@model PagedList.PagedList<Duble2.Models.Curriculum>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Учебный план";
 }
 
 @using PagedList.Mvc;
 @using PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -45,7 +45,6 @@
                 </tr>
             }
         </table>
-
 
         <a class="btn btn-primary" href="@Url.Action("Create","Curricula")">Create &raquo;</a>
 
